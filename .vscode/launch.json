@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "compounds": [
         {
@@ -16,24 +13,31 @@
     "configurations": [
         {
             "name": "Renderer",
-            "port": 9222,
+            "type": "chrome",
             "request": "attach",
-            "type": "firefox",
-            "webRoot": "${workspaceFolder}"
+            "port": 9222,
+            "webRoot": "${workspaceFolder}",
+            "timeout": 30000,
+            "sourceMaps": true
         },
         {
             "name": "Main",
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
             "windows": {
                 "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
             },
-            "args": [
-                ".",
+            "runtimeArgs": [
                 "--remote-debugging-port=9222"
             ],
+            "args": [
+                "."
+            ],
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ],
+            "preLaunchTask": "npm: dev",
             "outputCapture": "std",
             "console": "integratedTerminal"
         }
